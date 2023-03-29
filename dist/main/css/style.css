@@ -1,0 +1,17 @@
+html {
+  scroll-behavior: initial;
+  width: 100%;
+}
+
+body {
+  font-family: "noto-sans-cjk-jp", sans-serif;
+  font-weight: 400;
+  font-style: normal;
+  letter-spacing: 1.5px;
+  min-height: 100%;
+}
+@media (max-width: 768px) {
+  body {
+    font-size: 14px;
+  }
+}

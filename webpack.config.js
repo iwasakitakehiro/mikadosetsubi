@@ -1,10 +1,11 @@
 const path = require("path");
 const Dotenv = require("dotenv-webpack");
+const webpack = require("webpack");
 
 module.exports = {
   entry: "./src/js/index.js",
   mode: "development",
-  output: { path: __dirname, filename: "./dist//main/js/bundle.js" },
+  output: { path: __dirname, filename: "./dist/main/js/bundle.js" },
   module: {
     rules: [
       {
@@ -17,11 +18,21 @@ module.exports = {
           },
         },
       },
+      {
+        test: /\.css$/,
+        use: ["style-loader", "css-loader"],
+      },
     ],
   },
   resolve: {
     extensions: ["*", ".js", ".json"],
   },
-  plugins: [new Dotenv()],
+  plugins: [
+    new Dotenv(),
+    new webpack.ProvidePlugin({
+      $: "jquery",
+      jQuery: "jquery",
+    }),
+  ],
   target: ["web", "es5"],
 };

@@ -1,21 +1,32 @@
-$poppins: "poppins", "noto-sans-cjk-jp", sans-serif;
-
-@mixin u1300 {
-  @media (max-width: (1300px)) {
-    @content;
-  }
-}
+@use "sass:math";
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@100;400;700&family=Noto+Sans+JP:wght@400;700&display=swap");
 
 @mixin tb {
-  @media (max-width: (1200px)) {
+  @media (max-width: 1200px) {
     @content;
   }
 }
 
 @mixin sp {
-  @media (max-width: (768px)) {
+  @media (max-width: 768px) {
     @content;
   }
+}
+
+:root {
+  --viewport: 1920;
+
+  @media (max-width: 1200px) {
+    --viewport: 1200;
+  }
+
+  @media (max-width: 768px) {
+    --viewport: 768;
+  }
+}
+
+@function pxtovw($num) {
+  @return calc(1vw * $num / var(--viewport) * 100);
 }
 
 html {

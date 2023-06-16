@@ -1,9 +1,11 @@
+const { src, dest, series, parallel, watch: gulpWatch } = require("gulp");
 const gulp = require("gulp");
 const browserSync = require("browser-sync").create();
 const sass = require("gulp-sass")(require("sass"));
 const webpackStream = require("webpack-stream");
 const webpack = require("webpack");
 const webpackConfig = require("./webpack.config");
+const imageResize = require("gulp-image-resize");
 
 function scssTask() {
   return gulp
@@ -43,12 +45,26 @@ function reload(done) {
   done();
 }
 
-function watch() {
+function watch(done) {
   gulp.watch("./src/scss/style.scss", scssTask);
   gulp.watch("./src/*.php", phpTask);
   gulp.watch("./src/js/*.js", jsTask);
+  done();
 }
 
-const dev = gulp.series(sync, watch);
+function resize(done) {
+  src("./src/img/**")
+    .pipe(
+      imageResize({
+        crop: true, // リサイズ後に画像をトリミングするかどうか
+        upscale: false, // リサイズ後に画像を拡大するかどうか
+      })
+    )
+    .pipe(dest("./dist/main/img/"));
+
+  done();
+}
+
+const dev = series(sync, parallel(watch, resize));
 
 exports.default = dev;

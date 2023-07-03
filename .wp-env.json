@@ -12,11 +12,12 @@
     }
   },
   "config": {
-    "WP_DEBUG": true
+    "WP_DEBUG": false
   },
   "mappings": {
     "wp-content/themes/main/": "./dist/main/",
     "wp-content/plugins/": "./dist/plugins/",
+    ".htaccess": "./dist/.htaccess",
     "sql": "./sql"
   }
 }

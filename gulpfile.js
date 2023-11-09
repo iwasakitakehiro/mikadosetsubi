@@ -65,6 +65,6 @@ function resize(done) {
   done();
 }
 
-const dev = series(sync, parallel(watch, resize));
+const dev = series(sync, parallel(watch));
 
 exports.default = dev;

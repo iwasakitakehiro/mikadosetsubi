@@ -1,14 +1,13 @@
 @use "sass:math";
-@import url("https://fonts.googleapis.com/css2?family=Inter:wght@100;400;700&family=Noto+Sans+JP:wght@400;700&display=swap");
 
 @mixin tb {
-  @media (max-width: 1200px) {
+  @media (max-width: 1280px) {
     @content;
   }
 }
 
 @mixin sp {
-  @media (max-width: 768px) {
+  @media (max-width: 640px) {
     @content;
   }
 }
@@ -16,12 +15,12 @@
 :root {
   --viewport: 1920;
 
-  @media (max-width: 1200px) {
+  @media (max-width: 1280px) {
     --viewport: 1200;
   }
 
-  @media (max-width: 768px) {
-    --viewport: 768;
+  @media (max-width: 640px) {
+    --viewport: 640;
   }
 }
 
@@ -35,9 +34,6 @@ html {
 }
 
 body {
-  font-family: "noto-sans-cjk-jp", sans-serif;
-  font-weight: 400;
-  font-style: normal;
   letter-spacing: 1.5px;
   min-height: 100%;
   @include sp() {

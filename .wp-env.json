@@ -1,9 +1,10 @@
 {
-  "core": "https://ja.wordpress.org/wordpress-5.8.5-ja.zip",
+  "core": "https://ja.wordpress.org/latest-ja.zip",
   "phpVersion": "7.4",
   "plugins": [
     "https://downloads.wordpress.org/plugin/classic-editor.1.6.2.zip",
-    "https://downloads.wordpress.org/plugin/wp-pagenavi.2.94.1.zip"
+    "https://downloads.wordpress.org/plugin/wp-pagenavi.2.94.1.zip",
+    "https://downloads.wordpress.org/plugin/google-sitemap-generator.4.1.21.zip"
   ],
   "themes": [],
   "port": 8000,
@@ -13,7 +14,7 @@
     }
   },
   "config": {
-    "WP_DEBUG": false
+    "WP_DEBUG": true
   },
   "mappings": {
     "wp-content/themes/main/": "./dist/main/",

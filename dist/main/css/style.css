@@ -1,17 +1,104 @@
+@charset "UTF-8";
+@import url("https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+JP&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap");
+:root {
+  --viewport: 1920;
+}
+@media (max-width: 1280px) {
+  :root {
+    --viewport: 1200;
+  }
+}
+@media (max-width: 768px) {
+  :root {
+    --viewport: 768;
+  }
+}
+
 html {
   scroll-behavior: initial;
   width: 100%;
+  font-size: 16px;
+}
+@media (max-width: 768px) {
+  html {
+    font-size: 16px;
+  }
+}
+
+img {
+  max-width: 100%;
 }
 
 body {
-  font-family: "noto-sans-cjk-jp", sans-serif;
-  font-weight: 400;
-  font-style: normal;
-  letter-spacing: 1.5px;
   min-height: 100%;
+  font-family: "Poppins", "IBM-Plex-Sans-JP", sans-serif;
 }
-@media (max-width: 768px) {
-  body {
-    font-size: 14px;
+
+.mv-slider {
+  height: 100vh;
+  overflow: hidden;
+  margin-inline: auto;
+}
+.mv-slider > div {
+  position: absolute;
+}
+
+.mask-content {
+  height: 100vh;
+  overflow: hidden;
+}
+
+.mv-slide {
+  width: 100%;
+  height: 100vh;
+  overflow: hidden;
+  mask-image: linear-gradient(225deg, #000 0%, #000 100%, transparent 100%, transparent 0%);
+  mask-repeat: no-repeat;
+  mask-position: 0 0;
+  mask-size: auto 100%;
+}
+.mv-slide.current-slide {
+  z-index: 1;
+}
+.mv-slide.next-slide {
+  width: 100%;
+  height: 100vh;
+  overflow: hidden;
+  z-index: 0;
+  mask-image: linear-gradient(225deg, #000 0%, #000 100%, transparent 100%, transparent 0%) !important;
+}
+
+.add-animation {
+  mask-image: linear-gradient(225deg, #000 0%, #000 30%, transparent 30%, transparent 0%);
+}
+
+@keyframes zoomUp {
+  0% {
+    mask-image: scale(1);
   }
+  100% {
+    mask-image: linear-gradient(225deg, rgb(0, 0, 0) 0%, rgb(0, 0, 0) 0%, transparent 0%, transparent 100%); /* 拡大率 */
+  }
+}
+.mv-shade {
+  position: absolute;
+  z-index: 2;
+  background: rgba(70, 70, 70, 0.8);
+  width: 100%;
+  height: 100vh;
+  padding-left: 160px;
+  padding-bottom: 200px;
+  display: flex;
+  justify-content: start;
+  align-items: end;
+}
+.mv-shade h1 {
+  font-size: 72px;
+  color: #fff;
+  line-height: 1.5;
+}
+.mv-shade p {
+  margin-top: 80px;
+  font-size: 32px;
+  color: #fff;
 }

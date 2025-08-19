@@ -60,6 +60,9 @@ body {
 .mv-slide.current-slide {
   z-index: 1;
 }
+.mv-slide.prev-slide {
+  z-index: -1;
+}
 .mv-slide.next-slide {
   width: 100%;
   height: 100vh;
@@ -83,7 +86,7 @@ body {
 .mv-shade {
   position: absolute;
   z-index: 2;
-  background: rgba(70, 70, 70, 0.8);
+  background: rgba(0, 0, 0, 0.8);
   width: 100%;
   height: 100vh;
   padding-left: 160px;

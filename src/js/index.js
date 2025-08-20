@@ -2,7 +2,8 @@ import "slick-carousel";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import gsap from "gsap";
-
+import { ScrollTrigger } from "gsap/all";
+gsap.registerPlugin(ScrollTrigger);
 const tl = gsap.timeline({ repeat: -1 });
 const images = gsap.utils.toArray(".mv-slide");
 const length = images.length;
@@ -39,42 +40,41 @@ images.forEach((image, index) => {
       const prevIndex = index === 0 ? length - 1 : index - 1;
       images[prevIndex].classList.add("prev-slide");
     },
-  }).to(
-    ".next-slide img",
+  });
+  // .to(
+  //   ".next-slide img",
+  //   {
+  //     scale: 1.05,
+  //     duration: 0.8,
+  //   },
+  //   "<"
+  // );
+});
+
+const mvTimeline = gsap.timeline({
+  scrollTrigger: {
+    trigger: ".mv",
+    scrub: 5,
+    start: "top+=10% top",
+    end: "center center",
+    markers: true,
+  },
+});
+
+mvTimeline
+  .to(".mv-shade div", {
+    autoAlpha: 0,
+    duration: 0.8,
+  })
+  .to(".second-section", {
+    autoAlpha: 1,
+    duration: 0.8,
+  })
+  .to(
+    ".mv-shade",
     {
-      scale: 1.05,
+      backdropFilter: "blur(10px)",
       duration: 0.8,
     },
     "<"
   );
-});
-
-// $(".mv-slider")
-//   // 最初のスライドに"add-animation"のclassを付ける(data-slick-index="0"が最初のスライドを指す)
-//   .on("init", function () {
-//     $('.slick-slide[data-slick-index="0"]').addClass("add-animation");
-//   })
-//   // 通常のオプション
-//   .slick({
-//     autoplay: true, // 自動再生ON
-//     fade: true, // フェードON
-//     arrows: false, // 矢印OFF
-//     speed: 2000, // スライド、フェードアニメーションの速度2000ミリ秒
-//     autoplaySpeed: 4000, // 自動再生速度4000ミリ秒
-//     pauseOnFocus: false, // フォーカスで一時停止OFF
-//     pauseOnHover: false, // マウスホバーで一時停止OFF
-//   })
-//   .on({
-//     // スライドが移動する前に発生するイベント
-//     beforeChange: function (event, slick, currentSlide, nextSlide) {
-//       // 表示されているスライドに"add-animation"のclassをつける
-//       $(".slick-slide", this).eq(nextSlide).addClass("slick-next");
-//       // あとで"add-animation"のclassを消すための"remove-animation"classを付ける
-//       $(".slick-slide", this).eq(currentSlide).addClass("slick-next");
-//     },
-//     // スライドが移動した後に発生するイベント
-//     afterChange: function () {
-//       // 表示していないスライドはアニメーションのclassを外す
-//       $(".slick-next", this).removeClass("slick-next");
-//     },
-//   });

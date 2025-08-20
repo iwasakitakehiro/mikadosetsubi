@@ -37,33 +37,82 @@ html {
   }
 }
 
-img {
-  max-width: 100%;
-}
-
 body {
   min-height: 100%;
   font-family: "Poppins", "IBM-Plex-Sans-JP", sans-serif;
 }
 
+.sp {
+  display: none;
+  @include sp() {
+    display: block;
+  }
+}
+
+.tb {
+  display: none;
+  @include tb() {
+    display: block;
+  }
+}
+
+.pc-tb {
+  @include tb() {
+    display: none;
+  }
+}
+
+.pc {
+  @include sp() {
+    display: none;
+  }
+}
+
+.mv {
+  height: 500vh;
+  @include sp() {
+    height: 300vh;
+  }
+  .mv-wrap {
+    position: sticky;
+    top: 100px;
+  }
+}
+
 .mv-slider {
-  height: 100vh;
+  height: calc(100vh - 100px);
   overflow: hidden;
   margin-inline: auto;
-
+  @include sp() {
+    height: calc(100vh - 100px);
+  }
   > div {
     position: absolute;
   }
 }
 .mask-content {
-  height: 100vh;
+  height: calc(100vh - 100px);
   overflow: hidden;
 }
 
 .mv-slide {
   width: 100%;
-  height: 100vh;
   overflow: hidden;
+  .mask-content {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    img {
+      width: 100%;
+    }
+    @include sp() {
+      img {
+        height: 100%;
+        width: auto;
+        max-width: auto;
+      }
+    }
+  }
   &.current-slide {
     z-index: 1;
   }
@@ -71,9 +120,6 @@ body {
     z-index: -1;
   }
   &.next-slide {
-    width: 100%;
-    height: 100vh;
-    overflow: hidden;
     z-index: 0;
     mask-image: linear-gradient(
       225deg,
@@ -125,20 +171,162 @@ body {
   z-index: 2;
   background: rgba(0, 0, 0, 0.8);
   width: 100%;
-  height: 100vh;
+  height: calc(100vh - 100px);
   padding-left: 160px;
   padding-bottom: 200px;
   display: flex;
   justify-content: start;
   align-items: end;
+  @include sp() {
+    padding-left: 20px;
+    padding-bottom: 0;
+    align-items: center;
+  }
   h1 {
     font-size: 72px;
     color: #fff;
     line-height: 1.5;
+    @include sp() {
+      font-size: 36px;
+    }
   }
   p {
     margin-top: 80px;
     font-size: 32px;
     color: #fff;
+    @include sp() {
+      margin-top: 30px;
+      font-size: 18px;
+    }
+  }
+}
+
+header {
+  display: flex;
+  justify-content: space-between;
+  padding: 20px 50px;
+  position: sticky;
+  top: 0;
+  z-index: 10;
+  background-color: #fff;
+  @include sp() {
+    padding: 14px 20px;
+  }
+  .logo {
+    width: 235px;
+  }
+  nav {
+    ul {
+      display: flex;
+      align-items: center;
+      gap: 30px;
+      li {
+        &.contact {
+          a {
+            color: #fff;
+            display: block;
+            padding: 20px 30px;
+            position: relative;
+            overflow: hidden;
+            border-radius: 50px;
+            background: linear-gradient(90deg, #4bbc37 0%, #91e42c 100%);
+            &::after {
+              content: "";
+              position: absolute;
+              inset: 0;
+              background: linear-gradient(90deg, #91e42c 0%, #4bbc37 100%);
+              opacity: 0;
+              transition: opacity 0.5s;
+              z-index: 1;
+            }
+            &:hover::after {
+              opacity: 1;
+            }
+            // ボタンのテキストなどはz-index:2で
+            span {
+              position: relative;
+              z-index: 2;
+            }
+          }
+        }
+      }
+    }
+  }
+}
+.second-section {
+  height: calc(100vh - 100px);
+  display: flex;
+  align-items: center;
+  position: fixed;
+  width: 100%;
+  top: 97px;
+  z-index: 3;
+  overflow-y: scroll;
+  opacity: 0;
+  visibility: hidden;
+  scrollbar-width: none;
+  @include tb() {
+    padding-top: 50px;
+    top: 88px;
+    height: calc(100vh - 88px);
+  }
+  > div {
+    width: 1280px;
+    margin: auto;
+    display: flex;
+    align-items: center;
+    gap: 100px;
+    @include tb() {
+      justify-content: center;
+      padding: 0 20px;
+      height: 100%;
+    }
+    div {
+      color: #fff;
+      @include tb() {
+        padding-bottom: 40px;
+      }
+      &.text-wrap {
+        @include tb() {
+          display: grid;
+          align-items: stretch;
+          height: 100%;
+        }
+      }
+      h1 {
+        font-size: 48px;
+        line-height: 1.5;
+        @include tb() {
+          font-size: 32px;
+          margin-bottom: 40px;
+        }
+      }
+      p {
+        margin-top: 80px;
+        line-height: 2.5;
+        font-weight: 300;
+        letter-spacing: -1px;
+        @include tb() {
+          font-size: 14px;
+          margin-top: 0px;
+          line-height: 2;
+        }
+      }
+      a {
+        margin-top: 80px;
+        display: inline-block;
+        padding: 20px 30px;
+        gap: 10px;
+        border-radius: 50px;
+        border: 1px solid #fff;
+        line-height: 1;
+        @include tb() {
+          text-align: center;
+          width: 255px;
+          margin: 50px auto 0;
+          display: block;
+        }
+      }
+    }
   }
 }

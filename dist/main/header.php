@@ -26,3 +26,41 @@
 </head>
 
 <body>
+    <header>
+        <div class="logo">
+            <a href="<?= get_home_url(); ?>/">
+                <img src="<?= get_template_directory_uri(); ?>/img/global/logo.png" alt="logo">
+            </a>
+        </div>
+        <div class="pc-tb">
+            <nav>
+                <ul>
+                    <li>
+                        <a href="<?= get_home_url(); ?>/service">
+                            業務内容
+                        </a>
+                    </li>
+                    <li>
+                        <a href="<?= get_home_url(); ?>/case">
+                            施工実績
+                        </a>
+                    </li>
+                    <li>
+                        <a href="<?= get_home_url(); ?>/company">
+                            会社案内
+                        </a>
+                    </li>
+                    <li>
+                        <a href="<?= get_home_url(); ?>/news">
+                            新着情報
+                        </a>
+                    </li>
+                    <li class="contact">
+                        <a href="<?= get_home_url(); ?>/contact">
+                            <span> お問い合わせ</span>
+                        </a>
+                    </li>
+                </ul>
+            </nav>
+        </div>
+    </header>

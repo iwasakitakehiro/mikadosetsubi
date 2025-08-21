@@ -316,3 +316,91 @@ header nav ul li.contact a span {
     display: block;
   }
 }
+
+.section-title h2 {
+  font-size: 82px;
+  line-height: 1;
+}
+.section-title p {
+  font-size: 20px;
+  color: #4bbc37;
+  font-weight: 600;
+  margin-top: 30px;
+}
+
+#service {
+  position: relative;
+  padding: 150px 0;
+  z-index: 5;
+  width: 100%;
+  background-color: #fff;
+}
+#service .service-wrap {
+  width: 100%;
+  max-width: 1600px;
+  gap: 200px;
+  margin: auto;
+  padding: 0 20px;
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+#service .service-wrap .img {
+  height: 70vh;
+  width: 52.5vh;
+  position: relative;
+}
+#service .service-wrap .img img {
+  position: absolute;
+  height: 100%;
+  top: 0;
+  opacity: 0;
+  transition: all 0.8s;
+}
+#service .service-wrap .img img.active {
+  opacity: 1;
+}
+#service .message {
+  margin: 80px 0;
+  line-height: 1.5;
+}
+#service ul {
+  width: 800px;
+}
+#service ul li {
+  opacity: 0.3;
+}
+#service ul li.active {
+  opacity: 1;
+  transition: all 1s;
+}
+#service ul li.active .arrow {
+  transform: translateX(0);
+  opacity: 1;
+}
+#service ul li a {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 30px 0 30px 50px;
+  border-left: 2px solid #4bbc37;
+  line-height: 1;
+}
+#service ul li a .category {
+  display: flex;
+  gap: 30px;
+}
+#service ul li a .category .number {
+  color: #4bbc37;
+  font-size: 24px;
+}
+#service ul li a .category .text {
+  font-size: 24px;
+}
+#service ul li a .arrow {
+  display: flex;
+  align-items: center;
+  transform: translateX(-50px);
+  opacity: 0;
+  transition: all 0.8s;
+}

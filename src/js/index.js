@@ -2,8 +2,10 @@ import "slick-carousel";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import gsap from "gsap";
-import { ScrollTrigger } from "gsap/all";
-gsap.registerPlugin(ScrollTrigger);
+import ScrollTrigger from "gsap/ScrollTrigger";
+import ScrollToPlugin from "gsap/ScrollToPlugin";
+gsap.registerPlugin(ScrollTrigger, ScrollToPlugin);
+
 const tl = gsap.timeline({ repeat: -1 });
 const images = gsap.utils.toArray(".mv-slide");
 const length = images.length;
@@ -57,7 +59,6 @@ const mvTimeline = gsap.timeline({
     scrub: 5,
     start: "top+=10% top",
     end: "center center",
-    markers: true,
   },
 });
 
@@ -78,3 +79,37 @@ mvTimeline
     },
     "<"
   );
+
+ScrollTrigger.create({
+  trigger: "#service",
+  start: "top-=50% bottom",
+  onEnter: () => {
+    gsap.to(window, {
+      scrollTo: "#service",
+      duration: 2,
+      ease: "power4.inOut",
+    });
+  },
+});
+
+const services = gsap.utils.toArray(".service-contents li");
+const serviceImages = gsap.utils.toArray(".service-wrap .img img");
+
+services.forEach((service, index) => {
+  service.addEventListener("mouseover", () => {
+    if (!service.classList.contains("active")) {
+      document
+        .querySelector(".service-wrap .img img.active")
+        ?.classList.remove("active");
+      document
+        .querySelector(`.${service.className}-img`)
+        .classList.add("active");
+      services.forEach((content) => {
+        if (content.classList.contains("active")) {
+          content.classList.remove("active");
+        }
+      });
+      service.classList.add("active");
+    }
+  });
+});

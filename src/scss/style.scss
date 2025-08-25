@@ -70,6 +70,8 @@ body {
 
 .mv {
   height: 500vh;
+  position: sticky;
+  top: 0;
   @include sp() {
     height: 300vh;
   }
@@ -103,7 +105,9 @@ body {
     align-items: center;
     justify-content: center;
     img {
-      width: 100%;
+      height: 100%;
+      width: auto;
+      max-width: auto;
     }
     @include sp() {
       img {
@@ -284,7 +288,8 @@ header {
     div {
       color: #fff;
       @include tb() {
-        padding-bottom: 40px;
+        width: 100%;
+        max-width: 500px;
       }
       &.text-wrap {
         @include tb() {
@@ -293,12 +298,28 @@ header {
           height: 100%;
         }
       }
-      h1 {
-        font-size: 48px;
-        line-height: 1.5;
+      .title {
         @include tb() {
-          font-size: 32px;
-          margin-bottom: 40px;
+          padding-bottom: 40px;
+        }
+        h2 {
+          font-size: 48px;
+          line-height: 1.5;
+          @include tb() {
+            font-size: 32px;
+            margin-bottom: 40px;
+          }
+        }
+      }
+      a {
+        @include tb() {
+          margin-bottom: 70px;
+        }
+        @include sp() {
+          width: 255px;
+          text-align: center;
+          margin: 50px auto 70px;
+          display: block;
         }
       }
       p {
@@ -312,34 +333,57 @@ header {
           line-height: 2;
         }
       }
-      a {
-        margin-top: 80px;
-        display: inline-block;
-        padding: 20px 30px;
-        gap: 10px;
-        border-radius: 50px;
-        border: 1px solid #fff;
-        line-height: 1;
-        @include tb() {
-          text-align: center;
-          width: 255px;
-          margin: 50px auto 0;
-          display: block;
-        }
-      }
     }
+  }
+}
+.link-btn {
+  color: #fff;
+  display: inline-block;
+  padding: 20px 30px;
+  position: relative;
+  overflow: hidden;
+  border-radius: 50px;
+  border: 1px solid #fff;
+  transition: border 0.5s;
+  margin-top: 100px;
+  &::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(90deg, #91e42c 0%, #4bbc37 100%);
+    opacity: 0;
+    transition: opacity 0.5s;
+    z-index: 1;
+  }
+  &:hover {
+    border: 1px solid #ffffff00;
+  }
+  &:hover::after {
+    opacity: 1;
+  }
+  // ボタンのテキストなどはz-index:2で
+  span {
+    position: relative;
+    z-index: 2;
   }
 }
 .section-title {
   h2 {
     font-size: 82px;
     line-height: 1;
+    @include sp() {
+      font-size: 54px;
+    }
   }
   p {
     font-size: 20px;
     color: #4bbc37;
     font-weight: 600;
     margin-top: 30px;
+    @include sp() {
+      margin-top: 20px;
+      font-size: 16px;
+    }
   }
 }
 #service {
@@ -347,6 +391,9 @@ header {
   padding: 150px 0;
   z-index: 5;
   width: 100%;
+  @include tb() {
+    padding: 80px 0;
+  }
   background-color: #fff;
   .service-wrap {
     width: 100%;
@@ -357,6 +404,9 @@ header {
     display: flex;
     justify-content: center;
     flex-wrap: wrap;
+    @include tb() {
+      gap: 50px;
+    }
     .img {
       height: 70vh;
       width: calc(70vh * 0.75);
@@ -367,6 +417,11 @@ header {
         top: 0;
         opacity: 0;
         transition: all 0.8s;
+        max-width: 100%;
+        @include sp() {
+          position: relative;
+          opacity: 1;
+        }
         &.active {
           opacity: 1;
         }
@@ -376,9 +431,16 @@ header {
   .message {
     margin: 80px 0;
     line-height: 1.5;
+    @include tb() {
+      margin: 50px 0;
+    }
+    @include sp() {
+      font-size: 14px;
+    }
   }
   ul {
-    width: 800px;
+    max-width: 800px;
+    width: 100%;
     li {
       opacity: 0.3;
       &.active {
@@ -396,15 +458,27 @@ header {
         padding: 30px 0 30px 50px;
         border-left: 2px solid #4bbc37;
         line-height: 1;
+        @include sp() {
+          padding: 20px 0 20px 20px;
+        }
         .category {
           display: flex;
           gap: 30px;
+          @include sp() {
+            gap: 20px;
+          }
           .number {
             color: #4bbc37;
             font-size: 24px;
+            @include sp() {
+              font-size: 20px;
+            }
           }
           .text {
             font-size: 24px;
+            @include sp() {
+              font-size: 18px;
+            }
           }
         }
         .arrow {
@@ -413,8 +487,595 @@ header {
           transform: translateX(-50px);
           opacity: 0;
           transition: all 0.8s;
+          @include sp() {
+            width: 20px;
+            transform: translateX(-30px);
+          }
         }
       }
+    }
+  }
+}
+
+#case {
+  background: #e5e5e5;
+  padding: 150px 160px 150px 0;
+  position: relative;
+  z-index: 3;
+  display: flex;
+  gap: 9.375em;
+  font-size: 0.83vw;
+  @include tb() {
+    flex-wrap: wrap-reverse;
+    padding: 100px 20px;
+    gap: 50px;
+  }
+
+  .case-wrap {
+    width: 100%;
+    max-width: 81.25em;
+    @include tb() {
+      max-width: none;
+    }
+    .case-list {
+      .slick-slide {
+        margin: 0 10px;
+        flex-shrink: 0;
+        @include sp() {
+          margin: 0;
+        }
+      }
+    }
+    ul {
+      .slick-track {
+        display: flex !important;
+        justify-content: flex-start !important;
+        gap: 30px;
+        @include sp() {
+          gap: 10px;
+        }
+      }
+      li {
+        display: flex;
+        align-items: centere;
+        a {
+          background-color: #fff;
+          padding: 30px;
+          display: inline-block;
+          font-size: 0.83vw;
+          width: 100%;
+          @include tb() {
+            padding: 20px 10px 30px;
+          }
+          @include sp() {
+            font-size: 16px;
+          }
+          @include sp() {
+            width: 162px;
+          }
+          .thumbnail {
+            width: 100%;
+            height: 15.625em;
+            overflow: hidden;
+            display: flex;
+            justify-content: center;
+            @include sp() {
+              width: 142px;
+              height: 100px;
+            }
+            img {
+              height: 100%;
+              max-width: auto;
+              width: auto;
+            }
+          }
+          .text {
+            margin-top: 30px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            @include sp() {
+              flex-wrap: wrap-reverse;
+              gap: 10px;
+              margin-top: 20px;
+            }
+            .title {
+              font-size: 20px;
+              @include tb() {
+                font-size: 14px;
+              }
+            }
+            .taxonomies {
+              background: #4bbc37;
+              display: flex;
+              width: 100px;
+              padding: 10px;
+              justify-content: center;
+              align-items: center;
+              gap: 10px;
+              color: #fff;
+              line-height: 1;
+              font-size: 12px;
+              @include tb() {
+                padding: 10px 0;
+                font-size: 10px;
+                width: 64px;
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+  .title-wrap {
+    @include tb() {
+      display: flex;
+      align-items: center;
+      gap: 50px;
+    }
+  }
+  .section-title {
+    &.case {
+      font-size: 0.83vw;
+      h2 {
+        font-size: 9.375em;
+        @include tb() {
+          font-size: 150px;
+        }
+        @include sp() {
+          font-size: 54px;
+        }
+      }
+      p {
+        font-size: 1.5em;
+        margin-top: 20px;
+        @include tb() {
+          font-size: 16px;
+        }
+      }
+    }
+  }
+  .link-btn {
+    color: #000;
+    border: 1px solid #000;
+    @include tb() {
+      margin-top: 0;
+      font-size: 16px;
+    }
+    @include sp() {
+      font-size: 12px;
+    }
+    &:hover {
+      border: 1px solid #00000000;
+      color: #fff;
+    }
+  }
+}
+
+#recruit {
+  padding: 150px 0 0;
+  position: relative;
+  z-index: 3;
+  @include sp() {
+    padding: 80px 0;
+  }
+  .recruit-wrap {
+    max-width: 1280px;
+    width: 100%;
+    padding: 0 20px;
+    margin: auto;
+    display: flex;
+    gap: 150px;
+    align-items: center;
+    @include tb() {
+      max-width: 800px;
+      display: block;
+    }
+    .text-warp {
+      color: #fff;
+      line-height: 2.5;
+      @include tb() {
+        margin: 50px 0;
+      }
+      @include sp() {
+        font-size: 14px;
+      }
+    }
+  }
+  .recruit-foot {
+    margin-top: 180px;
+    display: flex;
+    justify-content: center;
+    overflow: hidden;
+    padding: 0 0 30px;
+    img {
+      height: 259px;
+      @include sp() {
+        height: 143px;
+      }
+    }
+    @include sp() {
+      margin-top: 80px;
+    }
+  }
+  .section-title {
+    &.recruit {
+      h2 {
+        color: #fff;
+        font-size: 100px;
+        @include sp() {
+          font-size: 54px;
+        }
+      }
+      p {
+        color: #fff;
+      }
+    }
+  }
+  .link-btn {
+    color: #fff;
+    border: 1px solid #fff;
+    &:hover {
+      border: 1px solid #00000000;
+      color: #fff;
+    }
+    @include tb() {
+      width: 255px;
+      margin-top: 0;
+      text-align: center;
+      margin: auto;
+      display: block;
+    }
+  }
+}
+
+#news {
+  padding: 150px 0;
+  background-color: #fff;
+  position: relative;
+  z-index: 3;
+  @include sp() {
+    padding: 80px 0;
+  }
+  .news-wrap {
+    width: 100%;
+    max-width: 1280px;
+    padding: 0 20px;
+    margin: auto;
+    display: flex;
+    align-items: center;
+    gap: 100px;
+    @include sp() {
+      flex-wrap: wrap;
+      gap: 30px;
+    }
+    .title-wrap {
+      @include sp() {
+        display: flex;
+        align-items: center;
+        gap: 50px;
+      }
+    }
+    .link-btn {
+      color: #000;
+      border: 1px solid #000;
+      white-space: nowrap;
+      @include sp() {
+        font-size: 12px;
+        margin-top: 0;
+      }
+    }
+    .news-contents {
+      width: 100%;
+      li {
+        a {
+          display: flex;
+          gap: 15px;
+          border-top: 1px solid #f5f5f5;
+          padding: 30px 0;
+          justify-content: space-between;
+          &:last-child {
+            border-bottom: 1px solid #f5f5f5;
+          }
+          .text-wrap {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            @include sp() {
+              display: block;
+            }
+          }
+          .label-date {
+            display: flex;
+            gap: 30px;
+            align-items: center;
+            @include sp() {
+              gap: 20px;
+            }
+            .date {
+              font-size: 14px;
+              @include sp() {
+                font-size: 10px;
+              }
+            }
+            .label {
+              padding: 8px 0;
+              white-space: nowrap;
+              border: 0.5px solid #222;
+              font-size: 12px;
+              width: 100px;
+              text-align: center;
+              line-height: 1;
+              align-items: center;
+              display: flex;
+              justify-content: center;
+              @include sp() {
+                padding: 10px 0;
+                font-size: 10px;
+                width: 100px;
+              }
+            }
+          }
+          .text {
+            display: flex;
+            justify-content: space-between;
+            width: 100%;
+            @include sp() {
+              margin-top: 16px;
+              font-size: 12px;
+            }
+          }
+          .arrow {
+            display: flex;
+            align-items: center;
+            opacity: 0;
+            transform: translate(-30px);
+            transition: transform 0.5s;
+          }
+          &:hover {
+            .arrow {
+              opacity: 1;
+              transform: translate(0px);
+            }
+          }
+        }
+      }
+    }
+  }
+}
+
+#contact {
+  background-image: url(../img/global/contact-bg.jpg);
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  position: relative;
+  z-index: 3;
+  .contact-shade {
+    backdrop-filter: blur(10px);
+    padding: 135px 0;
+    background-color: rgba(0, 33, 95, 0.3);
+    @include sp() {
+      padding: 0;
+    }
+  }
+  .img-wrap {
+    font-size: 0.83vw;
+    width: 43.25rem;
+    max-width: 692px;
+    @include sp() {
+      width: 335px;
+      margin: auto;
+    }
+    img {
+      width: 100%;
+    }
+  }
+  .contact-wrap {
+    width: 100%;
+    max-width: 1600px;
+    padding: 100px 70px 160px 160px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin: auto;
+    gap: 50px;
+    @include tb() {
+      justify-content: center;
+      padding: 80px 20px;
+    }
+  }
+  .section-title {
+    &.contact {
+      h2 {
+        color: #fff;
+        font-size: 120px;
+        @include sp() {
+          font-size: 54px;
+        }
+      }
+      p {
+        color: #fff;
+        font-size: 20px;
+        @include sp() {
+          font-size: 16px;
+        }
+      }
+    }
+  }
+  .text {
+    line-height: 2.5;
+    color: #fff;
+    margin-top: 100px;
+    @include tb() {
+      margin: 50px 0;
+    }
+    @include sp() {
+      font-size: 14px;
+    }
+  }
+  .link-btn {
+    @include tb() {
+      width: 255px;
+      margin: 50px auto 0;
+      text-align: center;
+      display: block;
+    }
+  }
+}
+
+footer {
+  padding: 100px 160px;
+  position: relative;
+  z-index: 3;
+}
+
+footer {
+  padding: 100px 160px;
+  position: relative;
+  z-index: 3;
+  @include sp() {
+    padding: 80px 20px;
+  }
+  .footer-nav {
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 20px;
+    @include sp() {
+      display: block;
+      max-width: 335px;
+      margin: auto;
+    }
+  }
+  .logo {
+    width: 235px;
+    @include sp() {
+      margin: auto;
+    }
+  }
+
+  nav {
+    ul {
+      display: flex;
+      align-items: center;
+      color: #fff;
+      flex-wrap: wrap;
+      @include tb() {
+        gap: 20px;
+      }
+      @include sp() {
+        display: block;
+        margin-top: 50px;
+      }
+      li {
+        font-size: 0.83vw;
+        width: 10em;
+        padding: 0 30px;
+        text-align: center;
+        border-left: 1px solid rgba(153, 153, 153, 0.1);
+        @include tb() {
+          width: auto;
+          padding: 0 30px;
+          border-left: 0;
+          border-top: 1px solid rgba(153, 153, 153, 0.1);
+        }
+        a {
+          padding: 20px 0;
+          @include sp() {
+            width: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+          }
+          .en {
+            font-size: 18px;
+          }
+          .jp {
+            font-size: 12px;
+            margin-top: 16px;
+            white-space: nowrap;
+            @include sp() {
+              margin-top: 0;
+            }
+          }
+        }
+        &.contact {
+          width: auto;
+          a {
+            font-size: 16px;
+            color: #fff;
+            display: block;
+            padding: 20px 30px;
+            position: relative;
+            overflow: hidden;
+            border-radius: 50px;
+            white-space: nowrap;
+            width: 160px;
+            background: linear-gradient(90deg, #4bbc37 0%, #91e42c 100%);
+            @include sp() {
+              width: 255px;
+              width: 100%;
+              margin-top: 30px;
+            }
+            &::after {
+              content: "";
+              position: absolute;
+              inset: 0;
+              background: linear-gradient(90deg, #91e42c 0%, #4bbc37 100%);
+              opacity: 0;
+              transition: opacity 0.5s;
+              z-index: 1;
+            }
+            &:hover::after {
+              opacity: 1;
+            }
+            // ボタンのテキストなどはz-index:2で
+            span {
+              position: relative;
+              z-index: 2;
+            }
+          }
+        }
+      }
+    }
+  }
+}
+
+iframe {
+  filter: grayscale(1);
+  @include sp() {
+    height: 88px;
+  }
+}
+
+.map-wrap {
+  display: flex;
+  gap: 30px;
+  margin-top: 50px;
+  > div {
+    width: 100%;
+  }
+  p {
+    color: #fff;
+    font-size: 12px;
+    line-height: 2;
+    font-weight: 300;
+    &.name {
+      font-weight: 600;
+      font-size: 14px;
+      margin-top: 30px;
+    }
+  }
+}
+
+.separate-character {
+  h2 {
+    line-height: 1 !important;
+    overflow: hidden;
+    span {
+      position: relative;
+      top: 1.1em;
     }
   }
 }

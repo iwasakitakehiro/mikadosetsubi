@@ -6,80 +6,21 @@ import ScrollTrigger from "gsap/ScrollTrigger";
 import ScrollToPlugin from "gsap/ScrollToPlugin";
 gsap.registerPlugin(ScrollTrigger, ScrollToPlugin);
 
-const tl = gsap.timeline({ repeat: -1 });
-const images = gsap.utils.toArray(".mv-slide");
-const length = images.length;
-
-// 最初のスライドに初期クラスを設定
-images[0].classList.add("current-slide");
-images[1].classList.add("next-slide");
-images[length - 1].classList.add("prev-slide");
-
-images.forEach((image, index) => {
-  const count = index === length - 1 ? 0 : index + 1;
-  tl.to(image, {
-    maskImage: `linear-gradient(
-      225deg,
-      #000 0%,
-      #000 0%,
-      transparent 0%,
-      transparent 0%`,
-    duration: 0.8,
-    delay: 5, // 最初のスライドは遅延なし
-    onStart: () => {
-      // 現在のスライドをcurrent-slideに設定
-      images.forEach((img, i) => {
-        img.classList.remove("current-slide", "next-slide", "prev-slide");
-      });
-
-      image.classList.add("current-slide");
-
-      // 次のスライドをnext-slideに設定
-      const nextIndex = index === length - 1 ? 0 : index + 1;
-      images[nextIndex].classList.add("next-slide");
-
-      // 前のスライドをprev-slideに設定
-      const prevIndex = index === 0 ? length - 1 : index - 1;
-      images[prevIndex].classList.add("prev-slide");
+// メインビジュアルのスクロールアニメーション
+gsap
+  .timeline({
+    scrollTrigger: {
+      trigger: ".mv",
+      scrub: 3,
+      start: "top+=10% top",
+      end: "center center",
     },
-  });
-  // .to(
-  //   ".next-slide img",
-  //   {
-  //     scale: 1.05,
-  //     duration: 0.8,
-  //   },
-  //   "<"
-  // );
-});
-
-const mvTimeline = gsap.timeline({
-  scrollTrigger: {
-    trigger: ".mv",
-    scrub: 5,
-    start: "top+=10% top",
-    end: "center center",
-  },
-});
-
-mvTimeline
-  .to(".mv-shade div", {
-    autoAlpha: 0,
-    duration: 0.8,
   })
-  .to(".second-section", {
-    autoAlpha: 1,
-    duration: 0.8,
-  })
-  .to(
-    ".mv-shade",
-    {
-      backdropFilter: "blur(10px)",
-      duration: 0.8,
-    },
-    "<"
-  );
+  .to(".mv-shade div", { autoAlpha: 0, duration: 0.8 })
+  .to(".second-section", { autoAlpha: 1, duration: 0.8 })
+  .to(".mv-shade", { backdropFilter: "blur(10px)", duration: 0.8 }, "<");
 
+// サービスセクションへの自動スクロール
 ScrollTrigger.create({
   trigger: "#service",
   start: "top-=50% bottom",
@@ -88,14 +29,49 @@ ScrollTrigger.create({
       scrollTo: "#service",
       duration: 2,
       ease: "power4.inOut",
+      onComplete: () => {
+        gsap.to("#second-section", {
+          opacity: 0,
+          duration: 0.8,
+        });
+      },
+    });
+  },
+  onLeaveBack: () => {
+    gsap.to("#second-section", {
+      opacity: 1,
+      duration: 0.8,
     });
   },
 });
 
-const services = gsap.utils.toArray(".service-contents li");
-const serviceImages = gsap.utils.toArray(".service-wrap .img img");
+function handleSlick() {
+  const $slider = $(".service-image-warap");
+  if (window.innerWidth <= 768) {
+    if (!$slider.hasClass("slick-initialized")) {
+      $slider.slick({
+        fade: true,
+        autoplay: true,
+        autoplaySpeed: 3000,
+        pauseOnHover: false,
+        pauseOnFocus: false,
+        arrows: false,
+        speed: 800,
+      });
+    }
+  } else {
+    if ($slider.hasClass("slick-initialized")) {
+      $slider.slick("unslick");
+    }
+  }
+}
 
-services.forEach((service, index) => {
+window.addEventListener("DOMContentLoaded", handleSlick);
+window.addEventListener("resize", handleSlick);
+
+// サービスリストのホバー連動
+const services = gsap.utils.toArray(".service-contents li");
+services.forEach((service) => {
   service.addEventListener("mouseover", () => {
     if (!service.classList.contains("active")) {
       document
@@ -103,13 +79,41 @@ services.forEach((service, index) => {
         ?.classList.remove("active");
       document
         .querySelector(`.${service.className}-img`)
-        .classList.add("active");
-      services.forEach((content) => {
-        if (content.classList.contains("active")) {
-          content.classList.remove("active");
-        }
-      });
+        ?.classList.add("active");
+      services.forEach((content) => content.classList.remove("active"));
       service.classList.add("active");
     }
   });
+});
+
+$(".case-list").slick({
+  autoplay: true,
+  arrows: false,
+  slidesToShow: 3,
+  centerMode: true,
+  responsive: [
+    {
+      breakpoint: 768,
+      settings: {
+        slidesToShow: 2,
+        centerMode: false,
+      },
+    },
+  ],
+});
+
+const separateTargets = document.querySelectorAll(".separate-character h2");
+
+separateTargets.forEach((characters) => {
+  const span = characters.querySelector("span");
+  if (!span) return;
+
+  const texts = span.textContent;
+  let newText = "";
+
+  for (let i = 0; i < texts.length; i++) {
+    newText += `<span>${texts[i]}</span>`;
+  }
+
+  span.innerHTML = newText;
 });

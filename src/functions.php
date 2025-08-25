@@ -23,7 +23,29 @@ function create_post_type()
       'show_ui' => true,
     )
   );
+  register_post_type(
+    'case',
+    array(
+      'labels' => array('name' => '施工事例'),
+      'public' => true,
+      'has_archive' => true,
+      'menu_position' => 100,
+      'supports' => array('title', 'editor', 'thumbnail'),
+    )
+  );
+  register_taxonomy(
+    'case_category',
+    'case',
+    array(
+      'hierarchical' => true,
+      'update_count_callback' => '_update_post_term_count',
+      'label' => 'カテゴリー',
+      'public' => true,
+      'show_ui' => true,
+    )
+  );
 }
+add_theme_support('post-thumbnails');
 //記事のURLを数字にする
 function news_post_type_link($link, $post)
 {

@@ -1,5 +1,5 @@
 <?= get_header(); ?>
-<main>
+<main class="top-page">
     <section class="mv">
         <div class="mv-wrap">
             <div class="mv-shade">
@@ -15,7 +15,7 @@
                 <div class="mv-slide">
                     <div>
                         <div class="mask-content">
-                            <img src="<?= get_template_directory_uri(); ?>/img/top/slider01.jpeg">
+                            <video src="<?= get_template_directory_uri(); ?>/img/top/mv.mp4" autoplay muted loop playsinline></video>
                         </div>
                     </div>
                 </div>
@@ -67,9 +67,9 @@
                 <img class="service04-img" src="<?= get_template_directory_uri(); ?>/img/top/service04.png">
             </div>
             <div>
-                <div class="section-title">
-                    <h2>Service</h2>
-                    <p>業務内容</p>
+                <div class="section-title separate-character-title">
+                    <h2><span>Service</span></h2>
+                    <h2 class="small"><span>業務内容</span></h2>
                 </div>
                 <div class="message">
                     <p>
@@ -138,61 +138,63 @@
     </section>
     <section id="case">
         <div class="case-wrap">
-            <ul class="case-list">
-                <?php
-                $posts = get_posts("post_type=case&posts_per_page=10");
-                if ($posts) : ?>
+            <div class="list-wrap">
+                <ul class="case-list">
                     <?php
-                    foreach ($posts as $post) {
-                        setup_postdata($post);
-                        $terms = get_the_terms($post->ID, 'case_category');
-                    ?>
-                        <li class="case">
-                            <a href="<?php the_permalink(); ?>">
-                                <div class="thumbnail">
-                                    <?= the_post_thumbnail(); ?>
-                                </div>
-                                <div class="text">
-                                    <p class="title"><?= the_title(); ?></p>
-                                    <?php the_taxonomies(array(
-                                        'before' => '<p class="taxonomies">',
-                                        'sep' => '',
-                                        'after' => '</p>',
-                                        'template' => '%2$l',
-                                        'term_template' => '%2$s',
-                                    )); ?>
+                    $posts = get_posts("post_type=case&posts_per_page=10");
+                    if ($posts) : ?>
+                        <?php
+                        foreach ($posts as $post) {
+                            setup_postdata($post);
+                            $terms = get_the_terms($post->ID, 'case_category');
+                        ?>
+                            <li class="case">
+                                <a href="<?php the_permalink(); ?>">
+                                    <div class="thumbnail">
+                                        <?= the_post_thumbnail(); ?>
+                                    </div>
+                                    <div class="text">
+                                        <p class="title"><?= the_title(); ?></p>
+                                        <?php the_taxonomies(array(
+                                            'before' => '<p class="taxonomies">',
+                                            'sep' => '',
+                                            'after' => '</p>',
+                                            'template' => '%2$l',
+                                            'term_template' => '%2$s',
+                                        )); ?>
 
-                                </div>
-                            </a>
-                        </li>
-                    <?php
+                                    </div>
+                                </a>
+                            </li>
+                        <?php
 
-                    }
-                    wp_reset_postdata();
-                    ?>
-                <?php else : ?>
-                    <div class="news__empty">
-                        <p>現在、施工事例は準備中です。</p>
-                    </div>
-                <?php endif; ?>
-            </ul>
-        </div>
-        <div class="title-wrap">
-            <div class="section-title case">
-                <h2>Case</h2>
-                <p>施工事例</p>
+                        }
+                        wp_reset_postdata();
+                        ?>
+                    <?php else : ?>
+                        <div class="news__empty">
+                            <p>現在、施工事例は準備中です。</p>
+                        </div>
+                    <?php endif; ?>
+                </ul>
             </div>
-            <div>
-                <a class="link-btn" href="<?= get_home_url(); ?>/case"><span>一覧はこちら</span></a>
+            <div class="title-wrap">
+                <div class="section-title case separate-character-title">
+                    <h2><span>Case</span></h2>
+                    <h2 class="small"><span>施工事例</span></h2>
+                </div>
+                <div>
+                    <a class="link-btn" href="<?= get_home_url(); ?>/case"><span>一覧はこちら</span></a>
+                </div>
             </div>
         </div>
     </section>
     <section id="recruit">
         <div class="recruit-wrap">
             <div>
-                <div class="section-title recruit">
-                    <h2>Recruit</h2>
-                    <p>採用情報</p>
+                <div class="section-title recruit separate-character-title">
+                    <h2><span>Recruit</span></h2>
+                    <h2 class="small"><span>採用情報</span></h2>
                 </div>
                 <div class="pc-tb">
                     <a class="link-btn" href="<?= get_home_url(); ?>/case"><span>採用情報はこちら</span></a>
@@ -218,9 +220,9 @@
     <section id="news">
         <div class="news-wrap">
             <div class="title-wrap">
-                <div class="section-title news">
-                    <h2>News</h2>
-                    <p>新着情報</p>
+                <div class="section-title news separate-character-title">
+                    <h2><span>News</span></h2>
+                    <h2 class="small"><span>新着情報</span></h2>
                 </div>
                 <div>
                     <a class="link-btn" href="<?= get_home_url(); ?>/news"><span>一覧はこちら</span></a>
@@ -269,9 +271,9 @@
         <div class="contact-shade">
             <div class="contact-wrap">
                 <div class="title-wrap">
-                    <div class="section-title contact">
-                        <h2>Contact</h2>
-                        <p>お問い合わせ</p>
+                    <div class="section-title contact separate-character-title">
+                        <h2><span>Contact</span></h2>
+                        <h2 class="small"><span>お問い合わせ</span></h2>
                     </div>
                     <div class="text">
                         <p>
@@ -295,78 +297,80 @@
         </div>
     </section>
     <footer>
-        <div>
-            <div class="footer-nav">
-                <div class="logo">
-                    <a href="<?= get_home_url(); ?>/">
-                        <img src="<?= get_template_directory_uri(); ?>/img/global/footer-logo.png" alt="logo">
-                    </a>
-                </div>
-                <nav>
-                    <ul>
-                        <li>
-                            <a href="<?= get_home_url(); ?>/service">
-                                <p class="en">Service</p>
-                                <p class="jp">業務内容</p>
-                            </a>
-                        </li>
-                        <li>
-                            <a href="<?= get_home_url(); ?>/case">
-                                <p class="en">Case</p>
-                                <p class="jp">施工実績</p>
-                            </a>
-                        </li>
-                        <li>
-                            <a href="<?= get_home_url(); ?>/company">
-                                <p class="en">Company</p>
-                                <p class="jp">会社案内</p>
-                            </a>
-                        </li>
-                        <li>
-                            <a href="<?= get_home_url(); ?>/recruit">
-                                <p class="en">Recruit</p>
-                                <p class="jp">採用情報</p>
-                            </a>
-                        </li>
-                        <li>
-                            <a href="<?= get_home_url(); ?>/news">
-                                <p class="en">News</p>
-                                <p class="jp">新着情報</p>
-                            </a>
-                        </li>
-                        <li class="contact">
-                            <a href="<?= get_home_url(); ?>/contact">
-                                <span> お問い合わせ</span>
-                            </a>
-                        </li>
-                    </ul>
-                </nav>
-            </div>
-        </div>
-        <div class="map-wrap">
+        <div class="footer-wrap">
             <div>
-                <div>
-                    <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d4593.492408983703!2d140.12334408530782!3d35.50206185213661!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x60229918c2b64ad5%3A0xf0c66b69c4b8366e!2z77yI5qCq77yJ5bid6Kit5YKZ!5e0!3m2!1sja!2sjp!4v1756097439019!5m2!1sja!2sjp" width="100%" height="175" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
-                </div>
-                <div>
-                    <p class="name">
-                        市原本社
-                    </p>
-                    <p class="address">〒290-0021　千葉県市原市山田橋2-3-18</p>
-                    <p class="address">TEL: 0436-43-1252／<br class="sp">FAX: 0436-41-7292</p>
+                <div class="footer-nav">
+                    <div class="logo">
+                        <a href="<?= get_home_url(); ?>/">
+                            <img src="<?= get_template_directory_uri(); ?>/img/global/footer-logo.png" alt="logo">
+                        </a>
+                    </div>
+                    <nav>
+                        <ul>
+                            <li>
+                                <a href="<?= get_home_url(); ?>/service">
+                                    <p class="en">Service</p>
+                                    <p class="jp">業務内容</p>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="<?= get_home_url(); ?>/case">
+                                    <p class="en">Case</p>
+                                    <p class="jp">施工実績</p>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="<?= get_home_url(); ?>/company">
+                                    <p class="en">Company</p>
+                                    <p class="jp">会社案内</p>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="<?= get_home_url(); ?>/recruit">
+                                    <p class="en">Recruit</p>
+                                    <p class="jp">採用情報</p>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="<?= get_home_url(); ?>/news">
+                                    <p class="en">News</p>
+                                    <p class="jp">新着情報</p>
+                                </a>
+                            </li>
+                            <li class="contact">
+                                <a href="<?= get_home_url(); ?>/contact">
+                                    <span> お問い合わせ</span>
+                                </a>
+                            </li>
+                        </ul>
+                    </nav>
                 </div>
             </div>
-            <div>
+            <div class="map-wrap">
                 <div>
-                    <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d202.5794437901185!2d139.77647893264609!3d35.670326144591435!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x60188960e9c1cae3%3A0xc29e17cb29a02968!2z44CSMTA0LTAwNDIg5p2x5Lqs6YO95Lit5aSu5Yy65YWl6Ii577yT5LiB55uu77yU4oiS77yXIOODhOOCq-ODgOODk-ODqyAz6ZqO!5e0!3m2!1sja!2sjp!4v1756097823754!5m2!1sja!2sjp" width="100%" height="175" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+                    <div>
+                        <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d4593.492408983703!2d140.12334408530782!3d35.50206185213661!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x60229918c2b64ad5%3A0xf0c66b69c4b8366e!2z77yI5qCq77yJ5bid6Kit5YKZ!5e0!3m2!1sja!2sjp!4v1756097439019!5m2!1sja!2sjp" width="100%" height="175" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+                    </div>
+                    <div>
+                        <p class="name">
+                            市原本社
+                        </p>
+                        <p class="address">〒290-0021　千葉県市原市山田橋2-3-18</p>
+                        <p class="address">TEL: 0436-43-1252／<br class="sp">FAX: 0436-41-7292</p>
+                    </div>
                 </div>
                 <div>
-                    <p class="name">
-                        東京営業所
-                    </p>
-                    <p class="address">〒104-0042　東京都中央区入船3-4-7　ツカダビル3階</p>
-                    <p class="address">TEL: 03-6262-80662／<br class="sp">FAX: 03-6262-8067</p>
+                    <div>
+                        <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d202.5794437901185!2d139.77647893264609!3d35.670326144591435!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x60188960e9c1cae3%3A0xc29e17cb29a02968!2z44CSMTA0LTAwNDIg5p2x5Lqs6YO95Lit5aSu5Yy65YWl6Ii577yT5LiB55uu77yU4oiS77yXIOODhOOCq-ODgOODk-ODqyAz6ZqO!5e0!3m2!1sja!2sjp!4v1756097823754!5m2!1sja!2sjp" width="100%" height="175" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+                    </div>
+                    <div>
+                        <p class="name">
+                            東京営業所
+                        </p>
+                        <p class="address">〒104-0042　東京都中央区入船3-4-7　ツカダビル3階</p>
+                        <p class="address">TEL: 03-6262-80662／<br class="sp">FAX: 03-6262-8067</p>
 
+                    </div>
                 </div>
             </div>
         </div>

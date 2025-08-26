@@ -17,7 +17,13 @@ gsap
     },
   })
   .to(".mv-shade div", { autoAlpha: 0, duration: 0.8 })
-  .to(".second-section", { autoAlpha: 1, duration: 0.8 })
+  .to(".second-section", {
+    autoAlpha: 1,
+    duration: 0.8,
+    onStart: () => {
+      textWaveAndUpMv("#second-section .separate-character h2");
+    },
+  })
   .to(".mv-shade", { backdropFilter: "blur(10px)", duration: 0.8 }, "<");
 
 // サービスセクションへの自動スクロール
@@ -29,6 +35,7 @@ ScrollTrigger.create({
       scrollTo: "#service",
       duration: 2,
       ease: "power4.inOut",
+
       onComplete: () => {
         gsap.to("#second-section", {
           opacity: 0,
@@ -102,18 +109,103 @@ $(".case-list").slick({
   ],
 });
 
-const separateTargets = document.querySelectorAll(".separate-character h2");
+function textWaveAndUp(target) {
+  const separateTargets = document.querySelectorAll(target);
 
-separateTargets.forEach((characters) => {
-  const span = characters.querySelector("span");
-  if (!span) return;
+  separateTargets.forEach((characters) => {
+    const span = characters.querySelector("span");
+    if (!span) return;
 
-  const texts = span.textContent;
-  let newText = "";
+    const texts = span.textContent;
+    let newText = "";
 
-  for (let i = 0; i < texts.length; i++) {
-    newText += `<span>${texts[i]}</span>`;
-  }
+    for (let i = 0; i < texts.length; i++) {
+      newText += `<span>${texts[i]}</span>`;
+    }
 
-  span.innerHTML = newText;
+    span.innerHTML = newText;
+
+    // 分割した文字要素を取得
+    const characterSpans = span.querySelectorAll("span");
+
+    // ScrollTriggerでアニメーション実行
+    ScrollTrigger.create({
+      trigger: characters,
+      start: "top bottom",
+      onEnter: () => {
+        gsap.to(characterSpans, {
+          top: 0,
+          opacity: 1,
+          duration: 0.8,
+          stagger: 0.03,
+          ease: "power2.out",
+        });
+      },
+    });
+  });
+}
+
+function textWaveAndUpMv(target) {
+  const separateTargets = document.querySelectorAll(target);
+
+  separateTargets.forEach((characters) => {
+    const span = characters.querySelector("span");
+    if (!span) return;
+
+    const texts = span.textContent;
+    let newText = "";
+
+    for (let i = 0; i < texts.length; i++) {
+      newText += `<span>${texts[i]}</span>`;
+    }
+
+    span.innerHTML = newText;
+
+    // 分割した文字要素を取得
+    const characterSpans = span.querySelectorAll("span");
+
+    // ScrollTriggerでアニメーション実行
+    ScrollTrigger.create({
+      trigger: characters,
+      start: "top bottom",
+      onEnter: () => {
+        gsap.to(characterSpans, {
+          top: 0,
+          opacity: 1,
+          duration: 0.8,
+          stagger: 0.03,
+          ease: "power2.out",
+        });
+      },
+    });
+  });
+}
+
+const sectionArray = [
+  ".service-wrap",
+  ".case-wrap",
+  ".recruit-wrap",
+  ".news-wrap",
+  ".contact-wrap",
+  ".footer-wrap",
+];
+
+sectionArray.forEach((section) => {
+  const pageScroll = gsap.timeline({
+    scrollTrigger: {
+      trigger: section,
+      start: "top bottom-=200px",
+    },
+  });
+  pageScroll.fromTo(
+    section,
+    { autoAlpha: 0 },
+    {
+      autoAlpha: 1,
+      duration: 0.8,
+      onStart: () => {
+        textWaveAndUp(`${section} .separate-character-title h2`);
+      },
+    }
+  );
 });

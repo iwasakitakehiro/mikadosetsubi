@@ -275,6 +275,7 @@ header {
   opacity: 0;
   visibility: hidden;
   scrollbar-width: none;
+
   @include tb() {
     padding-top: 50px;
     top: 88px;
@@ -1114,6 +1115,518 @@ iframe {
       span {
         top: 0.7em;
         opacity: 0;
+      }
+    }
+  }
+}
+
+footer {
+  &.under-page {
+    background-color: #2222224d;
+  }
+}
+
+.sv {
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  color: #fff;
+  padding: 150px 320px;
+  @include tb() {
+    padding: 100px 150px;
+  }
+  @include sp() {
+    padding: 80px 20px;
+  }
+  h1 {
+    font-size: 82px;
+    line-height: 1;
+    @include sp() {
+      font-size: 36px;
+    }
+  }
+  p {
+    line-height: 1;
+    margin-top: 30px;
+    font-size: 20px;
+    @include sp() {
+      font-size: 14px;
+      margin-top: 20px;
+    }
+  }
+  &.service {
+    background-image: url(../img/sv/service.png);
+  }
+  &.company {
+    background-image: url(../img/sv/company.png);
+  }
+  &.recruit {
+    background-image: url(../img/sv/recruit.png);
+  }
+}
+
+.service-page-contents {
+  .service-page-content {
+    padding: 100px 0;
+    @include sp() {
+      padding: 80px 0;
+    }
+    &:nth-of-type(2n) {
+      background: #f5f5f5;
+    }
+    &-wrap {
+      width: 100%;
+      max-width: 1280px;
+      padding: 0 20px;
+      margin: auto;
+      .title {
+        display: flex;
+        gap: 20px;
+        h2 {
+          color: #222;
+          font-size: 36px;
+          @include sp() {
+            font-size: 20px;
+          }
+        }
+        .number {
+          color: #4bbc37;
+        }
+      }
+      .text {
+        margin: 80px 0;
+        line-height: 2;
+        color: #666;
+        @include tb() {
+          margin: 50px 0;
+        }
+        @include sp() {
+          font-size: 14px;
+        }
+      }
+      .img {
+        img {
+          width: 100%;
+        }
+      }
+    }
+  }
+}
+
+.fade-up {
+  opacity: 0;
+  visibility: hidden;
+}
+
+.company-page-contents {
+  background-position: bottom right;
+  background-repeat: no-repeat;
+  background-size: cover;
+  &.numbers {
+    .title {
+      h2 {
+        text-align: center;
+        font-size: 32px;
+        font-weight: 500;
+        @include sp() {
+          font-size: 20px;
+          text-align: left;
+        }
+      }
+    }
+    .list-wrap {
+      margin-top: 80px;
+      @include sp() {
+        margin-top: 50px;
+      }
+      ul {
+        display: grid;
+        grid-template-columns: auto auto;
+        &.tb {
+          display: none;
+          @include tb() {
+            display: block;
+          }
+        }
+        @include tb() {
+          grid-template-columns: auto;
+          max-width: 800px;
+          margin: auto;
+          &.pc-tb {
+            display: none;
+          }
+        }
+        li {
+          padding: 30px 50px;
+          color: #666;
+          border-top: 1px solid #e5e5e5;
+          @include sp() {
+            padding: 30px 20px;
+          }
+          &.gray {
+            background-color: #e5e5e5;
+          }
+          p {
+            display: flex;
+            @include tb() {
+              justify-content: space-between;
+            }
+            @include sp() {
+              font-size: 14px;
+            }
+            span {
+              &:first-child {
+                width: 400px;
+                @include tb() {
+                  width: auto;
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+  &.chart {
+    background-color: #f5f5f5;
+    .title {
+      h2 {
+        text-align: center;
+        font-size: 32px;
+        font-weight: 500;
+        @include sp() {
+          font-size: 20px;
+        }
+      }
+    }
+    .chart-list {
+      margin: 80px auto 0;
+      width: 1000px;
+      @include sp() {
+        margin: 50px auto 0;
+      }
+      svg {
+        width: 100%;
+        height: auto;
+        rect {
+          transform-origin: 90px 0px !important;
+          transform: matrix(0, 0, 0, 1, 0, 0);
+          @include sp() {
+            transform-origin: 50px 0px !important;
+          }
+        }
+      }
+      @include tb() {
+        width: 100%;
+      }
+    }
+  }
+  &.message {
+    background-image: url(../img/company/message-bg.png);
+    @include tb() {
+      background-size: contain;
+    }
+  }
+  &.detail {
+    background-image: url(../img/company/detail-bg.png);
+    .title {
+      h2 {
+        text-align: center;
+        font-size: 32px;
+        font-weight: 500;
+        @include sp() {
+          font-size: 20px;
+          text-align: left;
+        }
+      }
+    }
+    table {
+      margin-top: 80px;
+      @include sp() {
+        margin-top: 50px;
+      }
+      th,
+      td {
+        padding: 50px 0;
+        border-top: 1px solid #e5e5e5;
+        @include sp() {
+          display: block;
+          border: none;
+          padding: 0;
+        }
+      }
+      tr {
+        &:last-child {
+          th,
+          td {
+            border-bottom: 1px solid #e5e5e5;
+          }
+        }
+      }
+      th {
+        font-weight: 500;
+        padding-left: 140px;
+        width: 340px;
+        @include sp() {
+          padding-left: 0;
+          width: auto;
+          padding: 0;
+          padding-top: 50px;
+          border-top: 1px solid #e5e5e5;
+        }
+      }
+      td {
+        font-weight: 400;
+        padding-right: 140px;
+        line-height: 2;
+        @include sp() {
+          width: auto;
+          padding-right: 0;
+          padding-bottom: 50px;
+          padding-top: 20px;
+          font-size: 14px;
+        }
+        span {
+          color: #999;
+          font-size: 12px;
+        }
+      }
+    }
+  }
+
+  .company-page-content {
+    padding: 100px 20px;
+    width: 100%;
+    max-width: 1280px;
+    margin: auto;
+    @include sp() {
+      padding: 80px 20px;
+    }
+
+    &.message {
+      display: flex;
+      justify-content: space-between;
+      gap: 50px;
+      @include tb() {
+        flex-wrap: wrap;
+        justify-content: center;
+      }
+      @include sp() {
+        gap: 80px;
+      }
+      .img {
+        img {
+          width: 100%;
+        }
+        @include tb() {
+          font-size: 0.83vw;
+          width: 30.25em;
+          min-width: 350px;
+        }
+      }
+      .message-wrap {
+        max-width: 550px;
+
+        h2 {
+          font-size: 32px;
+          font-weight: 500;
+          @include sp() {
+            font-size: 20px;
+          }
+        }
+      }
+      .message-text {
+        font-weight: 400;
+        margin-top: 80px;
+        line-height: 2.5;
+        @include sp() {
+          margin-top: 50px;
+          font-size: 14px;
+        }
+        span {
+          font-size: 20px;
+          font-weight: 500;
+          @include sp() {
+            font-size: 14px;
+          }
+        }
+      }
+      .message-name {
+        margin-top: 80px;
+        font-size: 18px;
+        font-weight: 500;
+        line-height: 2;
+        @include sp() {
+          margin-top: 50px;
+          font-size: 14px;
+        }
+      }
+    }
+  }
+}
+
+.recruit-page-contents {
+  &.graph {
+    padding: 100px 0;
+    background-image: url(../img/recruit/graph-bg.png);
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+  }
+  .recruit-page-content {
+    &.jobs {
+      .job-content-wrap {
+        display: flex;
+        @include tb() {
+          display: block;
+        }
+        .job-content {
+          font-size: 0.83vw;
+          padding: 9.375em 6em;
+          clip-path: inset(0% 100% 0% 0%);
+          @include tb() {
+            font-size: 16px;
+          }
+          @include sp() {
+            padding: 80px 20px;
+          }
+          &:nth-of-type(2) {
+            border-left: 1px solid #e5e5e5;
+            border-right: 1px solid #e5e5e5;
+            @include tb() {
+              border-left: none;
+              border-right: none;
+              border-top: 1px solid #e5e5e5;
+              border-bottom: 1px solid #e5e5e5;
+            }
+          }
+          .title {
+            text-align: center;
+            font-size: 1.5em;
+            @include sp() {
+              font-size: 20px;
+            }
+          }
+          .img {
+            margin: 50px 0;
+            width: 27.5rem;
+            @include tb() {
+              margin: 50px auto;
+            }
+            @include sp() {
+              width: 100%;
+            }
+            img {
+              width: 100%;
+            }
+          }
+          .text {
+            color: #999999;
+            line-height: 2;
+            font-size: 16px;
+            @include sp() {
+              font-size: 14px;
+            }
+          }
+        }
+      }
+    }
+    &.graph {
+      padding: 0 20px;
+      width: 100%;
+      max-width: 1280px;
+      margin: auto;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 50px;
+      @include tb() {
+        flex-wrap: wrap;
+        justify-content: center;
+      }
+      .graph-wrap {
+        display: grid;
+        grid-template-columns: auto auto;
+        .circle {
+          width: 275px;
+          height: 275px;
+          border-radius: 500px;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          background: linear-gradient(
+            180deg,
+            rgba(255, 255, 255, 0.5) 50%,
+            rgba(255, 255, 255, 0.8) 100%
+          );
+          backdrop-filter: blur(10px);
+          @include sp() {
+            width: 168px;
+            height: 168px;
+          }
+          .title {
+            text-align: center;
+            font-size: 18px;
+            font-weight: 500;
+            line-height: 1.5;
+            @include sp() {
+              font-size: 12px;
+            }
+          }
+          .numbers {
+            margin-top: 10px;
+            text-align: center;
+            @include sp() {
+              margin-top: 0;
+            }
+            .number-target {
+              font-size: 54px;
+              color: #4bbc37;
+              font-weight: 500;
+              display: inline-block;
+              height: 1em;
+              overflow: hidden;
+              @include sp() {
+                font-size: 32px;
+              }
+              span {
+                position: relative;
+                top: 1em;
+              }
+            }
+            .unit {
+              font-size: 16px;
+              font-weight: 400;
+              color: #222;
+              height: 1em;
+              overflow: hidden;
+              @include sp() {
+                font-size: 12px;
+              }
+              span {
+                position: relative;
+                top: 1em;
+              }
+            }
+          }
+        }
+      }
+      .text-wrap {
+        h2 {
+          font-size: 32px;
+          font-weight: 500;
+          @include sp() {
+            font-size: 20px;
+          }
+        }
+        p {
+          font-weight: 400;
+          line-height: 2.5;
+          margin-top: 80px;
+          @include sp() {
+            font-size: 14px;
+          }
+        }
       }
     }
   }

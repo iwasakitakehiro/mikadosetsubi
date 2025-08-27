@@ -80,7 +80,7 @@
                 <div>
                     <ul class="service-contents">
                         <li class="service01 active">
-                            <a class="active" href="<?= get_home_url(); ?>/">
+                            <a class="active" href="<?= get_home_url(); ?>/service/#01">
                                 <div class="category">
                                     <p class="number">01</p>
                                     <p class="text">空調設備工事</p>
@@ -93,7 +93,7 @@
                             </a>
                         </li>
                         <li class="service02">
-                            <a href="<?= get_home_url(); ?>/">
+                            <a href="<?= get_home_url(); ?>/service/#02">
                                 <div class="category">
                                     <p class="number">02</p>
                                     <p class="text">給排水設備工事</p>
@@ -106,7 +106,7 @@
                             </a>
                         </li>
                         <li class="service03">
-                            <a href="<?= get_home_url(); ?>/">
+                            <a href="<?= get_home_url(); ?>/service/#03">
                                 <div class="category">
                                     <p class="number">03</p>
                                     <p class="text">水道工事</p>
@@ -119,7 +119,7 @@
                             </a>
                         </li>
                         <li class="service04">
-                            <a href="<?= get_home_url(); ?>/">
+                            <a href="<?= get_home_url(); ?>/service/#04">
                                 <div class="category">
                                     <p class="number">04</p>
                                     <p class="text">土木工事</p>

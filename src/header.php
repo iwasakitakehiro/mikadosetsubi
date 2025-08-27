@@ -21,7 +21,6 @@
     <link rel="icon" href="/favicon.ico">
     <link rel="canonical" href="<?php echo esc_url((is_ssl() ? 'https://' : 'http://') . $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI']); ?>" />
     <link rel="stylesheet" href="<?php echo get_template_directory_uri() ?>/css/reset.css">
-    <link rel="stylesheet" href="<?php echo get_template_directory_uri() ?>/css/output.css">
     <link rel="stylesheet" href="<?php echo get_template_directory_uri() ?>/css/style.css">
 </head>
 
@@ -48,6 +47,11 @@
                     <li>
                         <a href="<?= get_home_url(); ?>/company">
                             会社案内
+                        </a>
+                    </li>
+                    <li>
+                        <a href="<?= get_home_url(); ?>/recruit">
+                            採用情報
                         </a>
                     </li>
                     <li>

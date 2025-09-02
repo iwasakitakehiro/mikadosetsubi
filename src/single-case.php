@@ -1,90 +1,54 @@
-<?= get_header(); ?>
+<?php get_header(); ?>
+
 <main class="under-page">
   <section>
-    <div class="sv service">
+    <div class="sv case">
       <div>
         <h1>
-          Service
+          Case
         </h1>
-        <p>業務内容</p>
+        <p>施工実績</p>
       </div>
     </div>
   </section>
-  <section class="service-page-contents">
-    <div class="service-page-content fade-up">
-      <div class="service-page-content-wrap">
-        <div class="title">
-          <h2>
-            <span class="number">01</span>
-            <span>空調設備工事</span>
-          </h2>
-        </div>
-        <div class="text">
-          <p>
-            ビル・住宅・公共施設などを対象に、空調・換気設備の設計・施工・保守を行っています。<br>
-            快適な室内環境を実現するため、省エネ性や機能性にも配慮した高品質な空調システムを提供しています。
-          </p>
-        </div>
-        <div class="img">
-          <img src="<?= get_template_directory_uri(); ?>/img/service/service01.png">
-        </div>
-      </div>
-    </div>
-    <div class="service-page-content fade-up">
-      <div class="service-page-content-wrap">
-        <div class="title">
-          <h2>
-            <span class="number">02</span>
-            <span>給排水設備工事</span>
-          </h2>
-        </div>
-        <div class="text">
-          <p>
-            建物内外の給排水設備工事を手がけています。<br>
-            新築や改修において、生活や業務に欠かせない水の供給と排水を安全かつ効率的に行うため、設計から施工・メンテナンスまで一貫して対応しています。
-          </p>
-        </div>
-        <div class="img">
-          <img src="<?= get_template_directory_uri(); ?>/img/service/service02.png">
+
+  <section class="case-page-contents">
+    <div class="case-wrap">
+      <div class="single-content">
+        <div>
+          <div class="title-wrap">
+            <?php the_taxonomies(array(
+              'before' => '<p class="taxonomies">',
+              'sep' => '',
+              'after' => '</p>',
+              'template' => '%2$l',
+              'term_template' => '%2$s',
+            )); ?>
+            <p class="title"><?= the_title(); ?></p>
+          </div>
+          <div class="detail">
+
+          </div>
+          <div class="content">
+            <?= the_content(); ?>
+          </div>
+          <div class="button-wrap">
+            <a class="link-btn" href="<?= get_home_url(); ?>/case"><span>一覧に戻る</span></a>
+          </div>
         </div>
       </div>
-    </div>
-    <div class="service-page-content fade-up">
-      <div class="service-page-content-wrap">
-        <div class="title">
-          <h2>
-            <span class="number">03</span>
-            <span>水道工事</span>
-          </h2>
-        </div>
-        <div class="text">
-          <p>
-            公共施設や民間建物を対象に、水道本管の布設や引込工事、給水装置工事などを行っています。<br>
-            安全で安定した水の供給を支えるため、地域インフラの整備・維持に貢献しています。
-          </p>
-        </div>
-        <div class="img">
-          <img src="<?= get_template_directory_uri(); ?>/img/service/service03.png">
-        </div>
-      </div>
-    </div>
-    <div class="service-page-content fade-up">
-      <div class="service-page-content-wrap">
-        <div class="title">
-          <h2>
-            <span class="number">04</span>
-            <span>土木工事</span>
-          </h2>
-        </div>
-        <div class="text">
-          <p>
-            道路・舗装・造成・上下水道などの土木工事を手がけています。<br>
-            地域のインフラ整備や暮らしを支える基盤づくりを通じて、安全で快適なまちづくりに貢献しています。
-          </p>
-        </div>
-        <div class="img">
-          <img src="<?= get_template_directory_uri(); ?>/img/service/service04.png">
-        </div>
+      <div class="years">
+        <p>施工年</p>
+        <ul>
+          <?php
+          wp_get_archives(array(
+            'type' => 'yearly',
+            'format' => 'html',
+            'post_type' => 'case',
+            'after' => '年'
+          ));
+          ?>
+        </ul>
       </div>
     </div>
   </section>
@@ -190,11 +154,10 @@
             </p>
             <p class="address">〒104-0042　東京都中央区入船3-4-7　ツカダビル3階</p>
             <p class="address">TEL: 03-6262-80662／<br class="sp">FAX: 03-6262-8067</p>
-
           </div>
         </div>
       </div>
     </div>
   </footer>
 </main>
-<?= get_footer(); ?>
+<?php get_footer(); ?>

@@ -13,12 +13,63 @@ if (document.querySelector(".top-page")) {
     .timeline({
       scrollTrigger: {
         trigger: ".mv",
-        scrub: 3,
         start: "top+=10% top",
         end: "center center",
+        toggleActions: "play none none reverse",
       },
     })
-    .to(".mv-shade div", { autoAlpha: 0, duration: 0.8 })
+    .to("body", {
+      overflow: "hidden",
+      height: "100vh",
+      duration: 0.1,
+      onStart: () => {
+        const subScrollArea = document.querySelector(".second-section");
+        if (subScrollArea.scrollHeight >= window.innerHeight) {
+          subScrollArea.addEventListener("scroll", function (e) {
+            // スクロール位置の判定
+            const scrollTop = subScrollArea.scrollTop;
+            const scrollHeight = subScrollArea.scrollHeight;
+            const clientHeight = subScrollArea.clientHeight;
+
+            // 一番下までスクロールしたか判定
+            if (scrollTop + clientHeight >= scrollHeight) {
+              // bodyのスクロール禁止を解除
+              document.body.style.overflow = "";
+              document.body.style.height = "auto";
+            }
+          });
+          subScrollArea.addEventListener("touchmove", function (e) {
+            // スクロール位置の判定
+            const scrollTop = subScrollArea.scrollTop;
+            const scrollHeight = subScrollArea.scrollHeight;
+            const clientHeight = subScrollArea.clientHeight;
+
+            // 一番下までスクロールしたか判定
+            if (scrollTop + clientHeight >= scrollHeight) {
+              // bodyのスクロール禁止を解除
+              document.body.style.overflow = "";
+              document.body.style.height = "auto";
+            }
+          });
+        }
+      },
+      onComplete: () => {
+        const subScrollArea = document.querySelector(".second-section > div");
+
+        if (subScrollArea.scrollHeight <= window.innerHeight) {
+          document.body.style.overflow = "";
+          document.body.style.height = "auto";
+        }
+      },
+    })
+    .to(
+      ".mv-shade div",
+      {
+        autoAlpha: 0,
+        duration: 0.8,
+      },
+      "<"
+    )
     .to(".second-section", {
       autoAlpha: 1,
       duration: 0.8,
@@ -39,11 +90,10 @@ if (document.querySelector(".top-page")) {
         scrollTo: "#service",
         duration: 2,
         ease: "power4.inOut",
-
         onComplete: () => {
           gsap.to("#second-section", {
             opacity: 0,
-            duration: 0.8,
+            duration: 0.3,
           });
         },
       });
@@ -112,42 +162,6 @@ if (document.querySelector(".top-page")) {
       },
     ],
   });
-
-  function textWaveAndUp(target) {
-    const separateTargets = document.querySelectorAll(target);
-
-    separateTargets.forEach((characters) => {
-      const span = characters.querySelector("span");
-      if (!span) return;
-
-      const texts = span.textContent;
-      let newText = "";
-
-      for (let i = 0; i < texts.length; i++) {
-        newText += `<span>${texts[i]}</span>`;
-      }
-
-      span.innerHTML = newText;
-
-      // 分割した文字要素を取得
-      const characterSpans = span.querySelectorAll("span");
-
-      // ScrollTriggerでアニメーション実行
-      ScrollTrigger.create({
-        trigger: characters,
-        start: "top bottom",
-        onEnter: () => {
-          gsap.to(characterSpans, {
-            top: 0,
-            opacity: 1,
-            duration: 0.8,
-            stagger: 0.03,
-            ease: "power2.out",
-          });
-        },
-      });
-    });
-  }
 
   function textWaveAndUpMv(target) {
     const separateTargets = document.querySelectorAll(target);
@@ -218,6 +232,42 @@ if (document.querySelector(".top-page")) {
 }
 const isUnderPage = document.querySelector(".under-page");
 
+function textWaveAndUp(target) {
+  const separateTargets = document.querySelectorAll(target);
+
+  separateTargets.forEach((characters) => {
+    const span = characters.querySelector("span");
+    if (!span) return;
+
+    const texts = span.textContent;
+    let newText = "";
+
+    for (let i = 0; i < texts.length; i++) {
+      newText += `<span>${texts[i]}</span>`;
+    }
+
+    span.innerHTML = newText;
+
+    // 分割した文字要素を取得
+    const characterSpans = span.querySelectorAll("span");
+
+    // ScrollTriggerでアニメーション実行
+    ScrollTrigger.create({
+      trigger: characters,
+      start: "top bottom",
+      onEnter: () => {
+        gsap.to(characterSpans, {
+          top: 0,
+          opacity: 1,
+          duration: 0.8,
+          stagger: 0.03,
+          ease: "power2.out",
+        });
+      },
+    });
+  });
+}
+
 if (isUnderPage) {
   const contents = document.querySelectorAll(".fade-up");
 
@@ -233,6 +283,21 @@ if (isUnderPage) {
       duration: 0.8,
       ease: "power2.out",
       delay: 0.2,
+      onStart: () => {
+        const separateH1 = content.querySelector(
+          ".separate-character-title h1"
+        );
+        if (separateH1) {
+          textWaveAndUp(".separate-character-title h1");
+          textWaveAndUp(".separate-character-title p");
+        }
+        const separateH2 = content.querySelector(
+          ".separate-character-title h2"
+        );
+        if (separateH2) {
+          textWaveAndUp(".separate-character-title h2");
+        }
+      },
     });
   });
 

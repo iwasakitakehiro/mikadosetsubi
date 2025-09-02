@@ -48,7 +48,7 @@
                         見えない部分にこそ品質と信頼を。<br class="pc-tb">
                         私たちは、最適な設備設計・施工を通じて、より良い暮らしの実現に取り組んでいます。
                     </p>
-                    <div>
+                    <div class="second-secton-end">
                         <a class="link-btn" href="<?= get_home_url(); ?>/company"><span>会社概要はこちら</span></a>
                     </div>
                 </div>

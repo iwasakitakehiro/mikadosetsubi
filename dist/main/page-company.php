@@ -1,21 +1,21 @@
 <?= get_header(); ?>
 <main class="under-page">
   <section>
-    <div class="sv company">
-      <div>
+    <div class="sv company fade-up">
+      <div class="separate-character-title">
         <h1>
-          Company
+          <span>Company</span>
         </h1>
-        <p>会社案内</p>
+        <p><span>会社案内</span></p>
       </div>
     </div>
   </section>
   <section class="company-page-contents message">
     <div class="company-page-content message fade-up">
       <div class="message-wrap">
-        <div>
+        <div class="separate-character-title">
           <h2>
-            代表メッセージ
+            <span>代表メッセージ</span>
           </h2>
         </div>
         <div>
@@ -121,8 +121,8 @@
   </section>
   <section class="company-page-contents numbers">
     <div class="company-page-content fade-up">
-      <div class="title">
-        <h2>資格者数</h2>
+      <div class="title separate-character-title">
+        <h2><span>資格者数</span></h2>
       </div>
       <div class="list-wrap">
         <ul class="tb">
